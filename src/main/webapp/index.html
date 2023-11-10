@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Bus</title>
+    <link href="styles.css" rel="stylesheet" type="text/css">
+    <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+</head>
+<body>
+<header>
+    <h1>Bus Ticketing System</h1>
+</header>
+<main>
+    <section id="booking-form">
+        <h2>Book a Ticket</h2>
+        <form id="ticket-form">
+            <label for="route">Select Route:</label>
+            <select id="route" name="route">
+                <option value="short">Shortcut</option>
+                <option value="long">Long cut</option>
+                <option value="risky">Risky Route</option>
+            </select>
+
+            <label for="passenger-name">Passenger Name:</label>
+            <input id="passenger-name" name="passenger-name" required type="text">
+
+            <label for="departure-time">Departure Date/Time:</label>
+            <input id="departure-time" name="departure-time" required type="datetime-local">
+
+            <label for="origin">Origin:</label>
+            <select id="origin" name="origin" required>
+                <option value="abia">Abia</option>
+                <option value="adamawa">Adamawa</option>
+                <option value="akwa-ibom">Akwa Ibom</option>
+                <option value="anambra">Anambra</option>
+                <option value="bauchi">Bauchi</option>
+                <option value="bayelsa">Bayelsa</option>
+                <option value="benue">Benua</option>
+                <option value="borno">Borno</option>
+                <option value="cross-river">Cross River</option>
+                <option value="delta">Delta</option>
+                <option value="ebonyi">Ebonyi</option>
+                <option value="edo">Edo</option>
+                <option value="ekiti">Ekiti</option>
+                <option value="enugu">Enugu</option>
+                <option value="fct">Federal Capital Territory</option>
+                <option value="gombe">Gombe</option>
+                <option value="imo">Imo</option>
+                <option value="jigawa">Jigawa</option>
+                <option value="kaduna">Kaduna</option>
+                <option value="kano">Kano</option>
+                <option value="katsina">Katsina</option>
+                <option value="kebbi">Kebbi</option>
+                <option value="kogi">Kogi</option>
+                <option value="kwara">Kwara</option>
+                <option value="lagos">Lagos</option>
+                <option value="nasarawa">Nasarawa</option>
+                <option value="niger">Niger</option>
+                <option value="ogun">Ogun</option>
+                <option value="ondo">Ondo</option>
+                <option value="osun">Osun</option>
+                <option value="oyo">Oyo</option>
+                <option value="plateau">Plateau</option>
+                <option value="rivers">Rivers</option>
+                <option value="sokoto">Sokoto</option>
+                <option value="taraba">Taraba</option>
+                <option value="yobe">Yobe</option>
+                <option value="zamara">Zamfara</option>
+            </select>
+
+            <label for="destination">Destination:</label>
+            <select id="destination" name="destination" required>
+                <option value="abia">Abia</option>
+                <option value="adamawa">Adamawa</option>
+                <option value="akwa-ibom">Akwa Ibom</option>
+                <option value="anambra">Anambra</option>
+                <option value="bauchi">Bauchi</option>
+                <option value="bayelsa">Bayelsa</option>
+                <option value="benue">Benua</option>
+                <option value="borno">Borno</option>
+                <option value="cross-river">Cross River</option>
+                <option value="delta">Delta</option>
+                <option value="ebonyi">Ebonyi</option>
+                <option value="edo">Edo</option>
+                <option value="ekiti">Ekiti</option>
+                <option value="enugu">Enugu</option>
+                <option value="fct">Federal Capital Territory</option>
+                <option value="gombe">Gombe</option>
+                <option value="imo">Imo</option>
+                <option value="jigawa">Jigawa</option>
+                <option value="kaduna">Kaduna</option>
+                <option value="kano">Kano</option>
+                <option value="katsina">Katsina</option>
+                <option value="kebbi">Kebbi</option>
+                <option value="kogi">Kogi</option>
+                <option value="kwara">Kwara</option>
+                <option value="lagos">Lagos</option>
+                <option value="nasarawa">Nasarawa</option>
+                <option value="niger">Niger</option>
+                <option value="ogun">Ogun</option>
+                <option value="ondo">Ondo</option>
+                <option value="osun">Osun</option>
+                <option value="oyo">Oyo</option>
+                <option value="plateau">Plateau</option>
+                <option value="rivers">Rivers</option>
+                <option value="sokoto">Sokoto</option>
+                <option value="taraba">Taraba</option>
+                <option value="yobe">Yobe</option>
+                <option value="zamara">Zamfara</option>
+            </select>
+
+            <label for="class">Class:</label>
+            <select id="class" name="class" required>
+                <option value="standard">Standard</option>
+                <option value="economy">Economy</option>
+                <option value="first-class">First Class</option>
+            </select>
+
+            <label for="bus-type">Bus Type:</label>
+            <select id="bus-type" name="bus-type" required>
+                <option value="sienna">Sienna</option>
+                <option value="hummer">Hummer</option>
+                <option value="fresh-air">Fresh Air</option>
+            </select>
+
+            <button type="submit">Book Ticket</button>
+        </form>
+    </section>
+
+    <section id="ticket-list">
+        <h2>Your Ticket</h2>
+        <ul a id="ticket-items">
+            <!-- Display booked tickets here -->
+        </ul>
+    </section>
+
+    <!--    <section id="booked-ticket-section">-->
+    <!--        <h2>Ticket Details</h2>-->
+    <!--        <div class="ticket-item">-->
+    <!--            &lt;!&ndash; Display the ticket details here &ndash;&gt;-->
+    <!--        </div>-->
+
+    <!--        <button id="print-button">Print Ticket</button>-->
+    <!--    </section>-->
+</main>
+
+<script src="script.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</body>
+</html>
