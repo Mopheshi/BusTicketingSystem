@@ -13,8 +13,7 @@ public class Bus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String busNumber;
-    private String busModel;
+    private String busNumber, busModel;
     private int capacity;
 
     @OneToMany(mappedBy = "bus")

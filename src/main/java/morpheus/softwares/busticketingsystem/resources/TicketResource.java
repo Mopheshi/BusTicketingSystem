@@ -26,7 +26,7 @@ public class TicketResource {
     public Response bookTicket(Ticket request) {
         // Validate input, authenticate user, and handle errors
         try {
-            Ticket ticket = ticketService.bookTicket(request.getId(), request.getPassengerName());
+            Ticket ticket = ticketService.bookTicket(request.getId(), request.getPassengerName(), request.getDepartureTime());
             return Response.status(Response.Status.CREATED).entity(ticket).build();
         } catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();

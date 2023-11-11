@@ -14,8 +14,7 @@ public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String origin;
-    private String destination;
+    private String origin, destination;
     private Date departureTime;
 
     @ManyToOne

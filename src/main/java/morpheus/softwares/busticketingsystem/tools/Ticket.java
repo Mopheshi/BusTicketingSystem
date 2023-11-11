@@ -2,8 +2,6 @@ package morpheus.softwares.busticketingsystem.tools;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
-
 /**
  * @author MOPHE
  */
@@ -12,11 +10,9 @@ public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String passengerName;
-    private String ticketStatus;
-    private Date bookingTime;
-    private int seatNumber;
+    private Long id, departureTime;
+    private String ticketId, passengerName, ticketStatus, origin, destination, ticketClass, busType;
+    private double price;
 
     @ManyToOne
     @JoinColumn(name = "route_id")
@@ -25,17 +21,31 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(Long id, String passengerName, String ticketStatus, Date bookingTime, int seatNumber, Route route) {
+    public Ticket(Long id, String ticketId, String passengerName, String ticketStatus, long departureTime,
+                  String origin, String destination, String ticketClass, String busType, Route route, double price) {
         setId(id);
+        setTicketId(ticketId);
         setPassengerName(passengerName);
         setTicketStatus(ticketStatus);
-        setBookingTime(bookingTime);
-        setSeatNumber(seatNumber);
+        setDepartureTime(departureTime);
+        setOrigin(origin);
+        setDestination(destination);
+        setTicketClass(ticketClass);
+        setBusType(busType);
         setRoute(route);
+        setPrice(price);
     }
 
     public Long getId() {
         return id;
+    }
+
+    public String getTicketId() {
+        return ticketId;
+    }
+
+    public void setTicketId(String ticketId) {
+        this.ticketId = ticketId;
     }
 
     public void setId(Long id) {
@@ -58,20 +68,48 @@ public class Ticket {
         this.ticketStatus = ticketStatus;
     }
 
-    public Date getBookingTime() {
-        return bookingTime;
+    public long getDepartureTime() {
+        return departureTime;
     }
 
-    public void setBookingTime(Date bookingTime) {
-        this.bookingTime = bookingTime;
+    public void setDepartureTime(long departureTime) {
+        this.departureTime = departureTime;
     }
 
-    public int getSeatNumber() {
-        return seatNumber;
+    public void setDepartureTime(Long departureTime) {
+        this.departureTime = departureTime;
     }
 
-    public void setSeatNumber(int seatNumber) {
-        this.seatNumber = seatNumber;
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public String getTicketClass() {
+        return ticketClass;
+    }
+
+    public void setTicketClass(String ticketClass) {
+        this.ticketClass = ticketClass;
+    }
+
+    public String getBusType() {
+        return busType;
+    }
+
+    public void setBusType(String busType) {
+        this.busType = busType;
     }
 
     public Route getRoute() {
@@ -80,5 +118,45 @@ public class Ticket {
 
     public void setRoute(Route route) {
         this.route = route;
+    }
+
+    public double getPrice(String busType, String ticketClass) {
+        // Define base prices for each bus type and class
+        double siennaPrice = 200.00;
+        double hummerPrice = 150.00;
+        double freshAirPrice = 100.00;
+
+        // Apply discounts or premiums based on the chosen class
+        switch (ticketClass) {
+            case "Standard":
+                // Standard class has no price change
+                break;
+            case "Economy":
+                // Apply a discount for economy class
+                siennaPrice *= 0.90;
+                hummerPrice *= 0.90;
+                freshAirPrice *= 0.90;
+                break;
+            case "First Class":
+                // Apply a premium for first class
+                siennaPrice *= 1.20;
+                hummerPrice *= 1.20;
+                freshAirPrice *= 1.20;
+                break;
+        }
+
+        // Determine the final price based on bus type
+        switch (busType) {
+            case "Hummer":
+                return hummerPrice;
+            case "Fresh Air":
+                return freshAirPrice;
+            default:
+                return siennaPrice;
+        }
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
