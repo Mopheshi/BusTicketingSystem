@@ -6,7 +6,7 @@
 
     <persistence-unit name="bus-persistence-unit">
 
-        <jta-data-source>java:jboss/datasource/bus@localhost</jta-data-source>
+        <jta-data-source>java:jboss/datasource/bus</jta-data-source>
 
         <properties>
             <property name="jakarta.persistence.schema-generation.database.action" value="none"/>

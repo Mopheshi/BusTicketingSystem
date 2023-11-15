@@ -18,8 +18,7 @@ public class BusTicketingServlet extends HttpServlet {
     private EntityManager entityManager;
 
     @Transactional
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             // Retrieve data from the form
             long departureTime = request.getDateHeader("departure-time");
