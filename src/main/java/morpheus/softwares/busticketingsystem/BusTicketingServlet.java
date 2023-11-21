@@ -53,10 +53,9 @@ public class BusTicketingServlet extends HttpServlet {
     }
 
     /**
-     * Generate a unique ticket id with a random 3-digit number between 100 and 999
+     * Generate a unique ticket id with a random number between 0 and 999
      */
     private String generateTicketId() {
-        Random random = new Random();
-        return "BUS" + random.nextInt(900) + 100;
+        return "BUS" + new Random().nextInt(1000);
     }
 }
