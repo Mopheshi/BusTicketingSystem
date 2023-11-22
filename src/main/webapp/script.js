@@ -1,13 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
     const ticketForm = document.getElementById('ticket-form');
     const ticketList = document.getElementById('ticket-items');
-    // const bookedTicketSection = document.getElementById('booked-ticket-section');
-    // const printButton = document.getElementById('print-button');
 
     ticketForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        // Extract form data
         const routeSelect = document.getElementById('route'),
             passengerName = document.getElementById('passenger-name').value,
             departureTime = document.getElementById('departure-time').value,
@@ -15,44 +12,64 @@ document.addEventListener('DOMContentLoaded', function () {
             destinationSelect = document.getElementById('destination'),
             ticketClassSelect = document.getElementById('class'),
             busTypeSelect = document.getElementById('bus-type');
-        // Retrieve selected items
+
         const route = routeSelect.options[routeSelect.selectedIndex].textContent,
             origin = originSelect.options[originSelect.selectedIndex].textContent,
             destination = destinationSelect.options[destinationSelect.selectedIndex].textContent,
             ticketClass = ticketClassSelect.options[ticketClassSelect.selectedIndex].textContent,
             busType = busTypeSelect.options[busTypeSelect.selectedIndex].textContent;
 
-        const price = '$30.00';
+        // Construct the payload
+        const payload = {
+            passengerName,
+            departureTime,
+            origin,
+            destination,
+            ticketClass,
+            busType
+        };
 
-        // Construct the ticket details
-        const ticketDetails = `
-            You are going to ${destination} from ${origin}
-            
-            Route: ${route}
-            Passenger: ${passengerName}
-            Departure Time: ${departureTime}
-            Origin: ${origin}
-            Destination: ${destination}
-            Class: ${ticketClass}
-            Bus Type: ${busType}
-            
-            Price: ${price}
-        `;
+        fetch('/bookTicket', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // TODO: Handle successful response from the backend
+                // TODO: Update the UI or perform any required action
+                console.log('Ticket booked successfully!', data);
 
-        // Create a new list item to display the submitted data
-        const listItem = document.createElement('li');
-        listItem.classList.add('ticket-item');
-        listItem.textContent = ticketDetails;
-        ticketList.appendChild(listItem);
+                // Display a success message to the user
+                const ticketDetails = `
+                You are going to ${destination} from ${origin}
+                Route: ${route}
+                Passenger: ${passengerName}
+                Departure Time: ${departureTime}
+                Origin: ${origin}
+                Destination: ${destination}
+                Class: ${ticketClass}
+                Bus Type: ${busType}
+            `;
 
-        // Clear the form inputs
-        ticketForm.reset();
-
-        // Display the submitted data in the booked ticket section
-        // bookedTicketSection.innerHTML = `You have submitted the following details: <br>${submittedData}`;
+                const listItem = document.createElement('li');
+                listItem.classList.add('ticket-item');
+                listItem.textContent = ticketDetails;
+                ticketList.appendChild(listItem);
+            })
+            .catch(error => {
+                console.error('Error booking ticket: ', error);
+            });
     });
 
-    // ticketForm.addEventListener('submit', function (e) {
+// ticketForm.addEventListener('submit', function (e) {
     //     e.preventDefault();
     //
     //     console.log("Form submitted")
