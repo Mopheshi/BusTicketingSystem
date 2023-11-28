@@ -10,8 +10,8 @@ public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id, departureTime;
-    private String ticketId, passengerName, ticketStatus, origin, destination, ticketClass, busType;
+    private Long id;
+    private String ticketId, passengerName, departureTime, ticketStatus, origin, destination, ticketClass, busType;
     private double price;
 
     @ManyToOne
@@ -21,18 +21,17 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(Long id, String ticketId, String passengerName, String ticketStatus, long departureTime,
+    public Ticket(Long id, String ticketId, String passengerName, String departureTime,
                   String origin, String destination, String ticketClass, String busType, Route route, double price) {
         setId(id);
         setTicketId(ticketId);
+        setRoute(route);
         setPassengerName(passengerName);
-        setTicketStatus(ticketStatus);
         setDepartureTime(departureTime);
         setOrigin(origin);
         setDestination(destination);
         setTicketClass(ticketClass);
         setBusType(busType);
-        setRoute(route);
         setPrice(price);
     }
 
@@ -68,15 +67,11 @@ public class Ticket {
         this.ticketStatus = ticketStatus;
     }
 
-    public long getDepartureTime() {
+    public String getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(long departureTime) {
-        this.departureTime = departureTime;
-    }
-
-    public void setDepartureTime(Long departureTime) {
+    public void setDepartureTime(String departureTime) {
         this.departureTime = departureTime;
     }
 

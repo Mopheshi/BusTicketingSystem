@@ -14,7 +14,7 @@ public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String origin, destination;
+    private String origin, destination, name;
     private Date departureTime;
 
     @ManyToOne
@@ -25,6 +25,10 @@ public class Route {
     private List<Ticket> tickets;
 
     public Route() {
+    }
+
+    public Route(String name) {
+        setName(name);
     }
 
     public Route(Long id, String origin, String destination, Date departureTime, Bus bus, List<Ticket> tickets) {
@@ -86,5 +90,13 @@ public class Route {
 
     public long getBusId() {
         return bus.getId();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

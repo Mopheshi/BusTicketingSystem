@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Construct the payload
         const payload = {
+            route,
             passengerName,
             departureTime,
             origin,

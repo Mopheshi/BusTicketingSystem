@@ -19,7 +19,7 @@ public class TicketService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Ticket bookTicket(long routeId, String passengerName, long departureTime) {
+    public Ticket bookTicket(long routeId, String passengerName, String departureTime) {
         Route route = entityManager.find(Route.class, routeId);
         if (route != null) {
             Ticket ticket = new Ticket();

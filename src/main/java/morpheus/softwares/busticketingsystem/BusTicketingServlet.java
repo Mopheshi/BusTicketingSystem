@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
+import morpheus.softwares.busticketingsystem.tools.Route;
 import morpheus.softwares.busticketingsystem.tools.Ticket;
 
 import java.io.IOException;
@@ -21,8 +22,9 @@ public class BusTicketingServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             // Retrieve data from the form
-            long departureTime = request.getDateHeader("departure-time");
-            String passengerName = request.getParameter("passenger-name"),
+            String departureTime = request.getParameter("departure-date"),
+                    passengerName = request.getParameter("passenger-name"),
+                    route = request.getParameter("route"),
                     origin = request.getParameter("origin"),
                     destination = request.getParameter("destination"),
                     ticketClass = request.getParameter("class"),
@@ -31,8 +33,10 @@ public class BusTicketingServlet extends HttpServlet {
 
             // Create a new Ticket entity
             Ticket ticket = new Ticket();
+            ticket.setId(null);
             ticket.setPassengerName(passengerName);
             ticket.setDepartureTime(departureTime);
+            ticket.setRoute(new Route(route));
             ticket.setOrigin(origin);
             ticket.setDestination(destination);
             ticket.setTicketClass(ticketClass);
@@ -55,6 +59,7 @@ public class BusTicketingServlet extends HttpServlet {
     /**
      * Generate a unique ticket id with a random number between 0 and 999
      */
+    @org.jetbrains.annotations.NotNull
     private String generateTicketId() {
         return "BUS" + new Random().nextInt(1000);
     }
